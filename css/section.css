@@ -1,0 +1,26 @@
+@import 'abstract/variables';
+
+/** @define SectionContainer */
+
+.SectionContainer {
+  margin-top: 10vh;
+  min-height: 100vh;
+}
+
+/** @define Section */
+
+.Section {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.Section-center {
+  text-align: center;
+}
+
+@media (max-width: 999px) {
+  .Section-withGutter {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}

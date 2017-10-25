@@ -1,0 +1,52 @@
+@import 'abstract/variables';
+
+/** @define ImageWrapper */
+
+.ImageWrapper {
+  border-width: 4px;
+  border-style: solid;
+  border-color: var(--color-font-primary);
+  box-shadow: 2px 2px 12px var(--color-font-primary);
+}
+
+.ImageWrapper-circle {
+  display: inline-block;
+  border-radius: 50%;
+  animation: rotate360 10s linear infinite;
+}
+
+.ImageWrapper-fullwidth {
+  border-width: 4px 0;
+}
+
+/** @define Image */
+
+.Image {
+  display: block;
+  filter: grayscale(40%) brightness(95%);
+  transition: filter 0.3s linear;
+}
+
+.Image:hover {
+  filter: grayscale(0%) brightness(100%);
+}
+
+.Image-circle {
+  width: 256px;
+  height: 256px;
+  border: 4px solid transparent;
+  border-radius: 50%;
+  animation: rotate360 10s linear reverse infinite;
+}
+
+.Image-center {
+  margin: 0 auto;
+}
+
+.Image-fullwidth {
+  width: 100%;
+  height: 40vh;
+  object-fit: cover;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}

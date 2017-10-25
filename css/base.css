@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400');
+@import 'abstract/variables';
+
+html {
+  background-color: var(--color-background-secondary);
+}
+
+body {
+  background-color: var(--color-background-primary);
+  background-image: url('images/diagonal-lines.svg');
+  border-top: 4px solid var(--color-background-secondary);
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  overflow-x: hidden;
+}
+

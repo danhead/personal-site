@@ -1,0 +1,115 @@
+/** @define Link */
+
+@import 'abstract/variables';
+
+.Link {
+  position: relative;
+  text-decoration: none;
+  color: var(--color-link-primary);
+  transition: filter 0.3s;
+  filter: brightness(100%);
+}
+
+.Link::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background:
+    linear-gradient(
+      90deg,
+      var(--color-link-primary),
+      var(--color-link-primary-light),
+      var(--color-link-primary)
+    );
+  background-size: 800%;
+}
+
+.Link-noUnderline::after {
+  height: 0;
+}
+
+/*
+ * Link States
+ */
+
+.Link:visited {
+  color: var(--color-link-primary);
+}
+
+.Link:hover {
+  filter: brightness(125%);
+}
+
+.Link:hover::after {
+  animation: gradient 6s ease infinite;
+}
+
+/*
+ * Link colours
+ */
+.Link-barclays,
+.Link-barclays:visited {
+  color: var(--color-barclays);
+}
+
+.Link-barclays::after {
+  background:
+    linear-gradient(
+      90deg,
+      var(--color-barclays),
+      var(--color-link-primary-light),
+      var(--color-barclays)
+    );
+  background-size: 800%;
+}
+
+.Link-twitter,
+.Link-twitter:visited {
+  color: var(--color-twitter);
+}
+
+.Link-twitter::after {
+  background:
+    linear-gradient(
+      90deg,
+      var(--color-twitter),
+      var(--color-link-primary-light),
+      var(--color-twitter)
+    );
+  background-size: 800%;
+}
+
+.Link-github,
+.Link-github:visited {
+  color: var(--color-github);
+}
+
+.Link-github::after {
+  background:
+    linear-gradient(
+      90deg,
+      var(--color-github),
+      var(--color-link-primary-light),
+      var(--color-github)
+    );
+  background-size: 800%;
+}
+
+.Link-footer,
+.Link-footer:visited {
+  color: var(--color-link-secondary);
+}
+
+.Link-footer::after {
+  background:
+    linear-gradient(
+      90deg,
+      var(--color-link-secondary),
+      var(--color-link-secondary-dark),
+      var(--color-link-secondary)
+    );
+  background-size: 800%;
+}

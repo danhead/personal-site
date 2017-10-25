@@ -1,0 +1,62 @@
+{
+  "name": "personal-site",
+  "version": "0.0.1",
+  "description": "Personal website written using Node and Express",
+  "author": "Dan Head <me@danielhead.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm-run-all css:compile",
+    "css:compile": "postcss -o dist/styles.css css/styles.css",
+    "css:lint": "stylelint --config .stylelintrc \"css/**/*.css\"",
+    "serve": "npm-run-all --parallel serve:*",
+    "serve:express": "nodemon",
+    "serve:bs": "browser-sync start --config .browser-sync.js",
+    "start": "npm-run-all --parallel watch serve",
+    "watch": "npm-watch"
+  },
+  "dependencies": {
+    "autoprefixer": "^7.1.6",
+    "cssnano": "^3.10.0",
+    "express": "^4.16.2",
+    "normalize.css": "^7.0.0",
+    "npm-run-all": "^4.1.1",
+    "postcss-cli": "^4.1.1",
+    "postcss-custom-properties": "^6.2.0",
+    "postcss-import": "^11.0.0",
+    "postcss-pxtorem": "^4.0.1",
+    "pug": "^2.0.0-rc.4",
+    "stylelint": "^8.2.0",
+    "stylelint-config-standard": "^17.0.0",
+    "stylelint-selector-bem-pattern": "^2.0.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "nodemon": "^1.12.1",
+    "npm-watch": "^0.3.0"
+  },
+  "browserslist": [
+    "Chrome >= 45",
+    "Firefox ESR",
+    "Edge >= 12",
+    "Explorer >= 11",
+    "iOS >= 9",
+    "Safari >= 9",
+    "Android >= 4.4",
+    "Opera >= 30"
+  ],
+  "watch": {
+    "css:compile": {
+      "patterns": [
+        "css"
+      ],
+      "extensions": "css"
+    },
+    "css:lint": {
+      "patterns": [
+        "css"
+      ],
+      "extensions": "css"
+    }
+  }
+}

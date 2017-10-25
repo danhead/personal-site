@@ -1,0 +1,29 @@
+@import 'abstract/variables';
+
+/** @define Nav */
+
+.Nav {
+  position: absolute;
+  top: 4px;
+  right: 0;
+  left: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@media (min-width: 1000px) {
+  .Nav {
+    padding: 0;
+  }
+}
+
+.Nav--content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 960px;
+  height: 10vh;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}

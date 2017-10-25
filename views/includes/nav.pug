@@ -1,0 +1,8 @@
+nav.Nav
+  ul.Nav--content
+    if back
+      li
+        a.Link.Link-noUnderline(href='/')
+          span(aria-hidden='true').Icon.Icon-small
+            include cheveron-left.pug
+          | Back
