@@ -6,7 +6,7 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "build": "npm-run-all css:compile",
+    "css": "npm-run-all --parallel css:lint css:compile",
     "css:compile": "postcss -o dist/styles.css css/styles.css",
     "css:lint": "stylelint --config .stylelintrc \"css/**/*.css\"",
     "serve": "npm-run-all --parallel serve:*",
@@ -15,6 +15,7 @@
     "start": "npm-run-all --parallel watch serve",
     "watch": "npm-watch"
   },
+  "pre-commit": [ "css:lint" ],
   "dependencies": {
     "autoprefixer": "^7.1.6",
     "cssnano": "^3.10.0",
@@ -33,7 +34,8 @@
   "devDependencies": {
     "browser-sync": "^2.18.13",
     "nodemon": "^1.12.1",
-    "npm-watch": "^0.3.0"
+    "npm-watch": "^0.3.0",
+    "pre-commit": "^1.2.2"
   },
   "browserslist": [
     "Chrome >= 45",
@@ -46,13 +48,7 @@
     "Opera >= 30"
   ],
   "watch": {
-    "css:compile": {
-      "patterns": [
-        "css"
-      ],
-      "extensions": "css"
-    },
-    "css:lint": {
+    "css": {
       "patterns": [
         "css"
       ],

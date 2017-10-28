@@ -6,14 +6,14 @@
   border-top: 4px solid black;
 }
 
-.Footer--container {
+.Footer-container {
   background-color: var(--color-background-secondary);
   border-top: 2px solid white;
   padding: 10px 0;
   text-align: center;
 }
 
-.Footer--text {
+.Footer-text {
   color: var(--color-font-secondary);
   font-size: 16px;
 }

@@ -1,12 +1,12 @@
 extends layouts/default.pug
 
 block content
-  .ImageWrapper.ImageWrapper-fullwidth
+  .ImageWrapper.ImageWrapper--fullWidth
     picture
       source(srcset='images/bar_2560w.jpg',media='(min-width: 1601px)')
       source(srcset='images/bar_1600w.jpg',media='(min-width: 961px)')
-      img.Image.Image-fullwidth(src='images/bar_960w.jpg')
-  section.Section.Section-withGutter
+      img.Image.Image--fullWidth(src='images/bar_960w.jpg')
+  section.Section.Section--withGutter
     h1 My name is Dan Head, I am an experienced Full Stack web developer
     p I build web stuff 💻
     p More coming soon...

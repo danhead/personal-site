@@ -27,7 +27,7 @@
   background-size: 800%;
 }
 
-.Link-noUnderline::after {
+.Link--noUnderline::after {
   height: 0;
 }
 
@@ -50,12 +50,12 @@
 /*
  * Link colours
  */
-.Link-barclays,
-.Link-barclays:visited {
+.Link--barclays,
+.Link--barclays:visited {
   color: var(--color-barclays);
 }
 
-.Link-barclays::after {
+.Link--barclays::after {
   background:
     linear-gradient(
       90deg,
@@ -66,12 +66,12 @@
   background-size: 800%;
 }
 
-.Link-twitter,
-.Link-twitter:visited {
+.Link--twitter,
+.Link--twitter:visited {
   color: var(--color-twitter);
 }
 
-.Link-twitter::after {
+.Link--twitter::after {
   background:
     linear-gradient(
       90deg,
@@ -82,12 +82,12 @@
   background-size: 800%;
 }
 
-.Link-github,
-.Link-github:visited {
+.Link--github,
+.Link--github:visited {
   color: var(--color-github);
 }
 
-.Link-github::after {
+.Link--github::after {
   background:
     linear-gradient(
       90deg,
@@ -98,12 +98,12 @@
   background-size: 800%;
 }
 
-.Link-footer,
-.Link-footer:visited {
+.Link--footer,
+.Link--footer:visited {
   color: var(--color-link-secondary);
 }
 
-.Link-footer::after {
+.Link--footer::after {
   background:
     linear-gradient(
       90deg,

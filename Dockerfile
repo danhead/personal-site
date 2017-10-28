@@ -9,6 +9,6 @@ EXPOSE 80
 
 RUN npm install
 
-RUN npm run build
+RUN npm run css
 
 CMD [ "node", "index.js" ]

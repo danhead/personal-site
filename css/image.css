@@ -9,13 +9,13 @@
   box-shadow: 2px 2px 12px var(--color-font-primary);
 }
 
-.ImageWrapper-circle {
+.ImageWrapper--circle {
   display: inline-block;
   border-radius: 50%;
   animation: rotate360 10s linear infinite;
 }
 
-.ImageWrapper-fullwidth {
+.ImageWrapper--fullWidth {
   border-width: 4px 0;
 }
 
@@ -31,7 +31,7 @@
   filter: grayscale(0%) brightness(100%);
 }
 
-.Image-circle {
+.Image--circle {
   width: 256px;
   height: 256px;
   border: 4px solid transparent;
@@ -39,11 +39,11 @@
   animation: rotate360 10s linear reverse infinite;
 }
 
-.Image-center {
+.Image--center {
   margin: 0 auto;
 }
 
-.Image-fullwidth {
+.Image--fullWidth {
   width: 100%;
   height: 40vh;
   object-fit: cover;
