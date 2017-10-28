@@ -1,18 +1,29 @@
 @import 'abstract/variables';
 
+.Icons {
+  position: fixed;
+  top: -10000px;
+  left: -10000px;
+}
+
 /** @define Icon */
 
 .Icon {
-  display: inline-block;
+  position: relative;
+  width: 48px;
+  height: 48px;
 }
-
-/* stylelint-disable */
-.Icon path {
-  fill: var(--color-link-primary);
-}
-/* stylelint-enable */
 
 .Icon--small {
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
+}
+
+.Icon--large {
+  width: 96px;
+  height: 96px;
+}
+
+.Icon-chevronLeft {
+  fill: var(--color-link-primary);
 }

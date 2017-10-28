@@ -3,6 +3,9 @@ nav.Nav
     if back
       li
         a.Link.Link--noUnderline(href='/')
-          span(aria-hidden='true').Icon.Icon--small
-            include cheveron-left.pug
+          svg(
+            aria-hidden='true',
+            viewBox='0 0 20 20'
+          ).Icon.Icon--small.Nav-icon
+            use(href='#chevron-left')
           | Back
