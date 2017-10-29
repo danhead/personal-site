@@ -11,14 +11,15 @@ server.use(express.static(path.join(__dirname, 'public')));
 
 server.get('/', (req, res) => {
   res.render('index', {
+    slug: '/',
     title: 'Web developer',
   });
 });
 
-server.get('/web-dev', (req, res) => {
-  res.render('web-dev', {
+server.get('/developer', (req, res) => {
+  res.render('developer', {
+    slug: 'developer',
     title: 'Web developer',
-    back: true,
   });
 });
 

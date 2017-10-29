@@ -1,8 +1,13 @@
+/* Base */
 @import 'normalize.css';
 @import 'base';
-@import 'nav';
-@import 'section';
-@import 'footer';
+
+/* Components */
 @import 'link';
 @import 'image';
 @import 'icon';
+
+/* Layout */
+@import 'nav';
+@import 'section';
+@import 'footer';
