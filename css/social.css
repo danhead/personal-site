@@ -1,0 +1,52 @@
+@import 'abstract/variables';
+
+/** @define Social */
+
+.Social {
+  float: right;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.Social-item {
+  display: inline-block;
+}
+
+.Social-link {
+  display: block;
+  padding: 12px 10px 8px;
+  color: var(--color-font-primary);
+}
+
+.Social-link:visited {
+  color: var(--color-font-primary);
+}
+
+.Social-link::after {
+  height: 0;
+}
+
+@media (min-width: 480px) {
+  .Social-icon {
+    position: absolute;
+    left: 0;
+  }
+}
+
+.Social-label {
+  display: none;
+  font-size: 18px;
+  padding-left: 20px;
+}
+
+@media (min-width: 480px) {
+  .Social-label {
+    display: inline-block;
+  }
+
+  .Social-icon {
+    position: absolute;
+    left: 0;
+  }
+}

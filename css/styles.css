@@ -8,6 +8,8 @@
 @import 'icon';
 
 /* Layout */
+@import 'navbar';
 @import 'nav';
+@import 'social';
 @import 'section';
 @import 'footer';
