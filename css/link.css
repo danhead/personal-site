@@ -47,6 +47,11 @@
   animation: gradient 6s ease infinite;
 }
 
+.Link:focus {
+  outline: 2px dashed var(--color-link-primary);
+  outline-offset: -1px;
+}
+
 /*
  * Link colours
  */
