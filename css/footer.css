@@ -3,12 +3,12 @@
 /** @define Footer */
 
 .Footer {
-  border-top: 4px solid black;
+  border-top: 4px solid var(--color-border-primary);
 }
 
 .Footer-container {
   background-color: var(--color-background-secondary);
-  border-top: 2px solid white;
+  border-top: 2px solid var(--color-background-primary);
   padding: 10px 0;
   text-align: center;
 }
