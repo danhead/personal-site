@@ -1,5 +1,5 @@
 module.exports = ctx => ({
-  map: ctx.options.map,
+  map: ctx.env !== 'production',
   plugins: {
     'postcss-import': {},
     'postcss-custom-properties': {},
