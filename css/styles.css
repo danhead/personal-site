@@ -3,6 +3,7 @@
 @import 'base';
 
 /* Components */
+@import 'list';
 @import 'link';
 @import 'image';
 @import 'icon';
