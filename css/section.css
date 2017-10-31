@@ -3,14 +3,14 @@
 /** @define SectionContainer */
 
 .SectionContainer {
-  margin-top: 8vh;
-  min-height: 92vh;
+  margin-top: 10vh;
+  min-height: 90vh;
 }
 
 /** @define Section */
 
 .Section {
-  max-width: 960px;
+  max-width: 720px;
   margin: 0 auto;
 }
 
@@ -18,9 +18,9 @@
   text-align: center;
 }
 
-@media (max-width: 999px) {
+@media (max-width: 767px) {
   .Section--withGutter {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 24px;
+    margin-right: 24px;
   }
 }

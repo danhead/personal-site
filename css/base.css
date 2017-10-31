@@ -17,3 +17,12 @@ body {
   overflow-x: hidden;
 }
 
+@media (max-width: 499px) {
+  h1 {
+    font-size: 7vw;
+  }
+
+  h2 {
+    font-size: 6vw;
+  }
+}
