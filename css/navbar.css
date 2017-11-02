@@ -15,3 +15,9 @@
   max-width: 960px;
   margin: 0 auto;
 }
+
+@media (max-width: 1008px) {
+  .NavBar-container {
+    padding: 0 24px;
+  }
+}
