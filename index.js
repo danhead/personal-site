@@ -12,20 +12,20 @@ server.use(express.static(path.join(__dirname, 'public')));
 server.get('/', (req, res) => {
   res.render('index', {
     slug: '/',
-    title: 'Daniel Head | Full stack Web developer',
+    title: 'Daniel Head | Full Stack Web Developer',
   });
 });
 
 server.get('/about', (req, res) => {
   res.render('about', {
     slug: 'about',
-    title: 'About me | Daniel Head',
+    title: 'About Me | Daniel Head',
   });
 });
 
 server.get('*', (req, res) => {
   res.status(404).render('not-found', {
-    title: 'Page not found | Daniel Head',
+    title: 'Page Not Found | Daniel Head',
   });
 });
 
