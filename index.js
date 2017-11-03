@@ -23,6 +23,10 @@ server.get('/about', (req, res) => {
   });
 });
 
+server.get('/minewatch/config', (req, res) => {
+  res.render('minewatch_config');
+});
+
 server.get('*', (req, res) => {
   res.status(404).render('not-found', {
     title: 'Page Not Found | Daniel Head',
