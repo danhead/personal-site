@@ -11,7 +11,7 @@ server.use(express.static(path.join(__dirname, 'public')));
 
 server.get('/', (req, res) => {
   res.render('index', {
-    slug: '/',
+    slug: '',
     title: 'Daniel Head | Full Stack Web Developer',
   });
 });
