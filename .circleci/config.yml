@@ -1,0 +1,53 @@
+version: 2
+jobs:
+  build-latest:
+    machine: true
+    steps:
+      - checkout
+      - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - run: docker build -t suburbanme/personal-site:latest .
+      - run: docker push suburbanme/personal-site:latest
+  deploy-latest:
+    machine: true
+    steps:
+      - run: |
+          # Write Docker certs
+          mkdir -p /home/circleci/certs
+          echo $CA_PEM | base64 -d > /home/circleci/certs/ca.pem
+          echo $CERT_PEM | base64 -d > /home/circleci/certs/cert.pem
+          echo $KEY_PEM | base64 -d > /home/circleci/certs/key.pem
+          echo $SERVER_KEY_PEM | base64 -d > /home/circleci/certs/server-key.pem
+      - run: |
+          # Set Docker environment variables
+          echo 'export DOCKER_TLS_VERIFY=1' >> $BASH_ENV
+          echo 'export DOCKER_HOST=$DOCKER_SERVER' >> $BASH_ENV
+          echo 'export DOCKER_CERT_PATH=/home/circleci/certs' >> $BASH_ENV
+          echo 'export DOCKER_MACHINE_NAME=$DOCKER_NAME' >> $BASH_ENV
+      - run: docker pull suburbanme/personal-site:latest
+      - run: "docker stop $DOCKER_CONTAINER_ID || :"
+      - run: "docker rm $DOCKER_CONTAINER_ID || :"
+      - run: |
+          docker run --name $DOCKER_CONTAINER_ID -d \
+            --restart=always \
+            -e LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL \
+            -e LETSENCRYPT_HOST=$LETSENCRYPT_HOST \
+            -e VIRTUAL_HOST=$VIRTUAL_HOST \
+            suburbanme/personal-site:latest
+
+workflows:
+  version: 2
+  build-latest-and-deploy:
+    jobs:
+      - build-latest:
+          filters:
+            branches:
+              only:
+                - master
+      - deploy-latest:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - build-latest
+
