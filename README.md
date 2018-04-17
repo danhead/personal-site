@@ -1,5 +1,7 @@
 # Personal website
 
+Build: [![CircleCI](https://circleci.com/gh/danhead/personal-site/tree/master.svg?style=svg)](https://circleci.com/gh/danhead/personal-site/tree/master)
+
 * NodeJS
 * Express
 * PugJS
