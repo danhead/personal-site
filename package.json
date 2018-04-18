@@ -6,16 +6,19 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "css": "npm-run-all --parallel css:lint css:compile",
+    "css": "run-p css:lint css:compile",
     "css:compile": "postcss -o dist/styles.css css/styles.css",
     "css:lint": "stylelint --config .stylelintrc \"css/**/*.css\"",
-    "serve": "npm-run-all --parallel serve:*",
+    "serve": "run-p serve:*",
     "serve:express": "nodemon",
     "serve:bs": "browser-sync start --config .browser-sync.js",
-    "start": "npm-run-all --parallel watch serve",
+    "start": "run-p watch serve",
+    "test": "npm run css:lint",
     "watch": "npm-watch"
   },
-  "pre-commit": [ "css:lint" ],
+  "pre-commit": [
+    "css:lint"
+  ],
   "dependencies": {
     "autoprefixer": "^7.1.6",
     "cssnano": "^3.10.0",
