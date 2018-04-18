@@ -4,6 +4,10 @@
   "description": "Personal website written using Node and Express",
   "author": "Dan Head <me@danielhead.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danhead/personal-site"
+  },
   "main": "index.js",
   "scripts": {
     "css": "run-p css:lint css:compile",
@@ -20,23 +24,23 @@
     "css:lint"
   ],
   "dependencies": {
-    "autoprefixer": "^7.1.6",
+    "autoprefixer": "^7.2.6",
     "cssnano": "^3.10.0",
-    "express": "^4.16.2",
-    "normalize.css": "^7.0.0",
-    "npm-run-all": "^4.1.1",
+    "express": "^4.16.3",
+    "normalize.css": "^8.0.0",
     "postcss-cli": "^4.1.1",
-    "postcss-custom-properties": "^6.2.0",
-    "postcss-import": "^11.0.0",
+    "postcss-custom-properties": "^6.3.1",
+    "postcss-import": "^11.1.0",
     "postcss-pxtorem": "^4.0.1",
-    "pug": "^2.0.0-rc.4",
-    "stylelint": "^8.2.0",
+    "pug": "^2.0.3",
+    "stylelint": "^8.4.0",
     "stylelint-config-standard": "^17.0.0",
     "stylelint-selector-bem-pattern": "^2.0.0"
   },
   "devDependencies": {
-    "browser-sync": "^2.18.13",
-    "nodemon": "^1.12.1",
+    "browser-sync": "^2.23.6",
+    "nodemon": "^1.17.3",
+    "npm-run-all": "^4.1.2",
     "npm-watch": "^0.3.0",
     "pre-commit": "^1.2.2"
   },
