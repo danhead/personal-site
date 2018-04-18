@@ -5,42 +5,61 @@ jobs:
       - image: circleci/node:8.11.1
     steps:
       - checkout
-      - run: npm install
-      - run: npm test
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Run tests
+          command: npm test
   build-latest:
     machine: true
     steps:
       - checkout
-      - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
-      - run: docker build -t suburbanme/personal-site:latest .
-      - run: docker push suburbanme/personal-site:latest
+      - run:
+          name: Login to Docker Hub
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - run:
+          name: Build Docker image
+          command: docker build -t suburbanme/personal-site:latest .
+      - run:
+          name: Push image to Docker Hub
+          command: docker push suburbanme/personal-site:latest
   deploy-latest:
     machine: true
     steps:
-      - run: |
-          # Write Docker certs
-          mkdir -p /home/circleci/certs
-          echo $CA_PEM | base64 -d > /home/circleci/certs/ca.pem
-          echo $CERT_PEM | base64 -d > /home/circleci/certs/cert.pem
-          echo $KEY_PEM | base64 -d > /home/circleci/certs/key.pem
-          echo $SERVER_KEY_PEM | base64 -d > /home/circleci/certs/server-key.pem
-      - run: |
-          # Set Docker environment variables
-          echo 'export DOCKER_TLS_VERIFY=1' >> $BASH_ENV
-          echo 'export DOCKER_HOST=$DOCKER_SERVER' >> $BASH_ENV
-          echo 'export DOCKER_CERT_PATH=/home/circleci/certs' >> $BASH_ENV
-          echo 'export DOCKER_MACHINE_NAME=$DOCKER_NAME' >> $BASH_ENV
-      - run: docker pull suburbanme/personal-site:latest
-      - run: "docker stop $DOCKER_CONTAINER_ID || :"
-      - run: "docker rm $DOCKER_CONTAINER_ID || :"
-      - run: |
-          docker run --name $DOCKER_CONTAINER_ID -d \
-            --restart=always \
-            -e LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL \
-            -e LETSENCRYPT_HOST=$LETSENCRYPT_HOST \
-            -e VIRTUAL_HOST=$VIRTUAL_HOST \
-            suburbanme/personal-site:latest
-
+      - run:
+          name: Write Docker certificates to disk
+          command: |
+            mkdir -p /home/circleci/certs
+            echo $CA_PEM | base64 -d > /home/circleci/certs/ca.pem
+            echo $CERT_PEM | base64 -d > /home/circleci/certs/cert.pem
+            echo $KEY_PEM | base64 -d > /home/circleci/certs/key.pem
+            echo $SERVER_KEY_PEM | base64 -d > /home/circleci/certs/server-key.pem
+      - run:
+          name: Set Docker environment variables
+          command: |
+            echo 'export DOCKER_TLS_VERIFY=1' >> $BASH_ENV
+            echo 'export DOCKER_HOST=$DOCKER_SERVER' >> $BASH_ENV
+            echo 'export DOCKER_CERT_PATH=/home/circleci/certs' >> $BASH_ENV
+            echo 'export DOCKER_MACHINE_NAME=$DOCKER_NAME' >> $BASH_ENV
+      - run:
+          name: Pull Docker image from Hub
+          command: docker pull suburbanme/personal-site:latest
+      - run:
+          name: Stop current Docker container
+          command: "docker stop $DOCKER_CONTAINER_ID || :"
+      - run:
+          name: Remove current Docker container
+          command: "docker rm $DOCKER_CONTAINER_ID || :"
+      - run:
+          name: Run new Docker container
+          command: |
+            docker run --name $DOCKER_CONTAINER_ID -d \
+              --restart=always \
+              -e LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL \
+              -e LETSENCRYPT_HOST=$LETSENCRYPT_HOST \
+              -e VIRTUAL_HOST=$VIRTUAL_HOST \
+              suburbanme/personal-site:latest
 workflows:
   version: 2
   build-latest-and-deploy:
@@ -60,4 +79,3 @@ workflows:
                 - master
           requires:
             - build-latest
-
