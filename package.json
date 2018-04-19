@@ -13,15 +13,18 @@
     "css": "run-p css:lint css:compile",
     "css:compile": "postcss -o dist/styles.css css/styles.css",
     "css:lint": "stylelint --config .stylelintrc \"css/**/*.css\"",
+    "jest": "jest",
+    "jest:watch": "jest --watch",
     "serve": "run-p serve:*",
     "serve:express": "nodemon",
     "serve:bs": "browser-sync start --config .browser-sync.js",
-    "start": "run-p watch serve",
-    "test": "npm run css:lint",
+    "start": "run-p watch jest:watch serve",
+    "test": "npm run css:lint && npm run jest",
     "watch": "npm-watch"
   },
   "pre-commit": [
-    "css:lint"
+    "css:lint",
+    "jest"
   ],
   "dependencies": {
     "autoprefixer": "^7.2.6",
@@ -39,10 +42,12 @@
   },
   "devDependencies": {
     "browser-sync": "^2.23.6",
+    "jest": "^22.4.3",
     "nodemon": "^1.17.3",
     "npm-run-all": "^4.1.2",
     "npm-watch": "^0.3.0",
-    "pre-commit": "^1.2.2"
+    "pre-commit": "^1.2.2",
+    "supertest": "^3.0.0"
   },
   "browserslist": [
     "Chrome >= 45",
