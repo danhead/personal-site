@@ -1,14 +1,16 @@
 FROM node:8.11.1-alpine
 
+ENV NODE_ENV production
+ENV PORT 80
+ARG SITE_STATS_ENABLED='false'
+ARG SITE_COMMIT_SHA1
+ARG SITE_BUILD_URL
+
 COPY ./ /usr/src
 WORKDIR /usr/src
 
-ENV NODE_ENV production
-ENV PORT 80
-EXPOSE 80
-
 RUN npm install
-
-RUN npm run css:compile
+RUN npm run build
 
 CMD [ "node", "index.js" ]
+EXPOSE 80

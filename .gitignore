@@ -32,3 +32,4 @@ jspm_packages/
 
 # Distribution assets
 dist/
+config.json

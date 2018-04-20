@@ -106,6 +106,7 @@
 .Link--footer,
 .Link--footer:visited {
   color: var(--color-link-secondary);
+  margin: 0 10px 0 5px;
 }
 
 .Link--footer::after {
@@ -117,4 +118,5 @@
       var(--color-link-secondary)
     );
   background-size: 800%;
+  height: 1px;
 }

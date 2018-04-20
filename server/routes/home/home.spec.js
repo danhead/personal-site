@@ -1,13 +1,13 @@
 const request = require('supertest');
-const server = require('../server');
+const server = require('../../index');
 
 describe('Test the server', () => {
-  test('It should respond with 200 to a GET method', () => {
+  test('Should respond with 200 to a GET method', () => {
     return request(server).get('/').then(res => {
       expect(res.statusCode).toBe(200);
     });
   });
-  test('It should contain the navigation', () => {
+  test('Should contain the navigation', () => {
     return request(server).get('/about').then(res => {
       const nav = '<nav class="NavBar">';
       const navLink = '<a class="Link Nav-link" href="/">Home</a>';
@@ -15,7 +15,7 @@ describe('Test the server', () => {
       expect(res.text.includes(navLink)).toBe(true);
     });
   });
-  test('It should contain the footer', () => {
+  test('Should contain the footer', () => {
     return request(server).get('/about').then(res => {
       const footer = '<footer class="Footer">';
       const copywrite = '&copy; Daniel Head';

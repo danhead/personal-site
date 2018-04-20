@@ -4,7 +4,7 @@ module.exports= {
   files: [
     'dist/**/*',
     'public/**/*',
-    'views/**/*',
+    'server/**/*',
     'index.js',
   ],
   watchTask: true,
