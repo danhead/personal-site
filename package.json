@@ -1,6 +1,6 @@
 {
   "name": "personal-site",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Personal website written using Node and Express",
   "author": "Dan Head <me@danielhead.com>",
   "license": "MIT",
