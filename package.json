@@ -9,24 +9,27 @@
     "url": "https://github.com/danhead/personal-site"
   },
   "main": "index.js",
+  "pre-commit": [
+    "css:lint",
+    "jest"
+  ],
   "scripts": {
     "build": "node pre-build.js && npm run css:compile",
     "css": "run-p css:lint css:compile",
     "css:compile": "postcss -o dist/styles.css css/styles.css",
     "css:lint": "stylelint --config .stylelintrc \"css/**/*.css\"",
+    "eslint": "eslint .",
     "jest": "jest",
     "jest:watch": "jest --watch",
     "serve": "run-p serve:*",
-    "serve:express": "nodemon -e js,pug",
+    "serve:express": "nodemon -q -e js,pug",
     "serve:bs": "browser-sync start --config .browser-sync.js",
-    "start": "run-p watch jest:watch serve",
-    "test": "npm run css:lint && npm run jest",
-    "watch": "npm-watch"
+    "start": "run-p watch serve",
+    "test": "npm run css:lint && npm run eslint && npm run jest",
+    "watch": "run-p watch:*",
+    "watch:css": "nodemon -q --watch css -e css --exec npm run css",
+    "watch:js": "nodemon -q -e js --exec npm run eslint"
   },
-  "pre-commit": [
-    "css:lint",
-    "jest"
-  ],
   "dependencies": {
     "autoprefixer": "^7.2.6",
     "cssnano": "^3.10.0",
@@ -37,18 +40,20 @@
     "postcss-custom-properties": "^6.3.1",
     "postcss-import": "^11.1.0",
     "postcss-pxtorem": "^4.0.1",
-    "pug": "^2.0.3",
-    "stylelint": "^8.4.0",
-    "stylelint-config-standard": "^17.0.0",
-    "stylelint-selector-bem-pattern": "^2.0.0"
+    "pug": "^2.0.3"
   },
   "devDependencies": {
     "browser-sync": "^2.23.6",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0",
     "jest": "^22.4.3",
     "nodemon": "^1.17.3",
     "npm-run-all": "^4.1.2",
-    "npm-watch": "^0.3.0",
     "pre-commit": "^1.2.2",
+    "stylelint": "^9.2.0",
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-selector-bem-pattern": "^2.0.0",
     "supertest": "^3.0.0"
   },
   "browserslist": [
@@ -60,13 +65,5 @@
     "Safari >= 9",
     "Android >= 4.4",
     "Opera >= 30"
-  ],
-  "watch": {
-    "css": {
-      "patterns": [
-        "css"
-      ],
-      "extensions": "css"
-    }
-  }
+  ]
 }

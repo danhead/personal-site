@@ -2,7 +2,7 @@ const fs = require('fs');
 const deep = require('object-assign-deep');
 const defaults = require('./defaults');
 
-let config = defaults;
+const config = defaults;
 
 function getConfig() {
   return config;
@@ -17,7 +17,7 @@ function fetchConfig() {
   if (fs.existsSync(config.config_path)) {
     try {
       res = JSON.parse(fs.readFileSync(config.config_path));
-    } catch(e) {
+    } catch (e) {
       throw new Error(e.message);
     }
   }

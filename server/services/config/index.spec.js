@@ -17,7 +17,7 @@ describe('Test the config middleware', () => {
     const config = index();
     expect(config.length).toBe(3);
   });
-  
+
   it('Should call the third parameter', () => {
     const config = index();
     const fn = jest.fn();
@@ -26,7 +26,7 @@ describe('Test the config middleware', () => {
   });
 
   it('Should run fetchConfig when called', () => {
-    const config = index();
+    index();
     expect(fetchConfig).toHaveBeenCalled();
   });
 });

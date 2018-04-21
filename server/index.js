@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
 const routes = require('./routes');
-const config = require('./middlewares/config');
+const config = require('./services/config');
+
 const server = express();
 
 server.set('view engine', 'pug');

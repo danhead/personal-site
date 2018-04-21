@@ -1,4 +1,6 @@
 const express = require('express');
+const { join } = require('path');
+
 const router = express.Router();
 
 /**
@@ -6,7 +8,7 @@ const router = express.Router();
  * https://github.com/danhead/minewatch
  */
 router.get('/', (req, res) => {
-  res.render(__dirname + '/minewatch');
+  res.render(join(__dirname, 'minewatch'));
 });
 
 module.exports = router;

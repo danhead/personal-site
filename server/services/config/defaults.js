@@ -5,5 +5,5 @@ module.exports = {
     stats_enabled: false,
     config_path: path.resolve(__dirname, '../../../config.json'),
   },
-}
+};
 

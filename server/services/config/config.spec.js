@@ -5,10 +5,9 @@ jest.mock('./defaults');
 jest.mock('fs');
 
 describe('Test the config module', () => {
-
   beforeEach(() => {
-    fs.__setExistsSync(true);
-    fs.__setMockFile('{}');
+    fs.__mocks__.setExistsSync(true);
+    fs.__mocks__.setMockFile('{}');
   });
 
   test('getConfig should return an object', () => {
@@ -37,19 +36,19 @@ describe('Test the config module', () => {
   });
 
   test('fetchConfig returns an empty object if file does not exist', () => {
-    fs.__setExistsSync(false);
+    fs.__mocks__.setExistsSync(false);
     expect(fetchConfig()).toEqual({});
   });
 
   test('fetchConfig throws an error if file exists but contains invalid JSON', () => {
-    fs.__setMockFile('invalid JSON');
+    fs.__mocks__.setMockFile('invalid JSON');
     expect(() => {
       fetchConfig();
     }).toThrow();
   });
 
   test('getConfig to contain updated data once fetchConfig has run', () => {
-    fs.__setMockFile(JSON.stringify({
+    fs.__mocks__.setMockFile(JSON.stringify({
       config: {
         stats_enabled: false,
       },

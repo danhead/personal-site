@@ -1,12 +1,11 @@
 const getPageConfig = require('./getPageConfig');
-const { getConfig, __setConfig } = require('./config');
+const { getConfig, __mocks__ } = require('./config');
 
 jest.mock('./config');
 
 describe('Test the getPageConfig method', () => {
-
   beforeEach(() => {
-    __setConfig({
+    __mocks__.setConfig({
       config: {
         foo: 'bar',
       },
