@@ -4,7 +4,7 @@ const { join } = require('path');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.status(404).render(join(__dirname, '404'), res.getPageConfig({
+  res.status(404).render(join(__dirname, '404'), res.getPageData({
     title: 'Page Not Found | Daniel Head',
   }));
 });

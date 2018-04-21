@@ -16,7 +16,7 @@ const {
 } = process.env;
 
 const gitURL = 'https://github.com/danhead/personal-site/commit/';
-const dataPath = resolve(__dirname, 'config.json');
+const dataPath = resolve(__dirname, 'data.json');
 
 function generateTimestamp() {
   const now = new Date();

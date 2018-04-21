@@ -1,20 +1,20 @@
-const getPageConfig = require('./getPageConfig');
-const { getConfig, __mocks__ } = require('./config');
+const getPageData = require('./getPageData');
+const { getData, __mocks__ } = require('./data');
 
-jest.mock('./config');
+jest.mock('./data');
 
-describe('Test the getPageConfig method', () => {
+describe('Test the getPageData method', () => {
   beforeEach(() => {
-    __mocks__.setConfig({
+    __mocks__.setData({
       config: {
         foo: 'bar',
       },
     });
   });
 
-  it('Should not modify the stored config object', () => {
-    getPageConfig({ baz: 123 });
-    expect(getConfig()).toEqual({
+  it('Should not modify the stored data object', () => {
+    getPageData({ baz: 123 });
+    expect(getData()).toEqual({
       config: {
         foo: 'bar',
       },
@@ -22,7 +22,7 @@ describe('Test the getPageConfig method', () => {
   });
 
   it('Should return a merged object', () => {
-    expect(getPageConfig({
+    expect(getPageData({
       config: {
         baz: 123,
       },

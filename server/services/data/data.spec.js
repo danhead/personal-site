@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { getConfig, updateConfig, fetchConfig } = require('./config');
+const { getData, updateData, fetchData } = require('./data');
 
 jest.mock('./defaults');
 jest.mock('fs');
@@ -10,55 +10,55 @@ describe('Test the config module', () => {
     fs.__mocks__.setMockFile('{}');
   });
 
-  test('getConfig should return an object', () => {
-    expect(getConfig()).toMatchObject({
+  test('getData should return an object', () => {
+    expect(getData()).toMatchObject({
       config: {
         stats_enabled: true,
-        config_path: '/valid/path',
+        data_path: '/valid/path',
       },
     });
   });
 
-  test('updateConfig should merge in new/updated data', () => {
-    updateConfig({
+  test('updateData should merge in new/updated data', () => {
+    updateData({
       config: {
         stats_enabled: false,
       },
       test: 'foo',
     });
-    expect(getConfig()).toMatchObject({
+    expect(getData()).toMatchObject({
       config: {
         stats_enabled: false,
-        config_path: '/valid/path',
+        data_path: '/valid/path',
       },
       test: 'foo',
     });
   });
 
-  test('fetchConfig returns an empty object if file does not exist', () => {
+  test('fetchData returns an empty object if file does not exist', () => {
     fs.__mocks__.setExistsSync(false);
-    expect(fetchConfig()).toEqual({});
+    expect(fetchData()).toEqual({});
   });
 
-  test('fetchConfig throws an error if file exists but contains invalid JSON', () => {
+  test('fetchData throws an error if file exists but contains invalid JSON', () => {
     fs.__mocks__.setMockFile('invalid JSON');
     expect(() => {
-      fetchConfig();
+      fetchData();
     }).toThrow();
   });
 
-  test('getConfig to contain updated data once fetchConfig has run', () => {
+  test('getData to contain updated data once fetchData has run', () => {
     fs.__mocks__.setMockFile(JSON.stringify({
       config: {
         stats_enabled: false,
       },
       foo: 'bar',
     }));
-    fetchConfig();
-    expect(getConfig()).toMatchObject({
+    fetchData();
+    expect(getData()).toMatchObject({
       config: {
         stats_enabled: false,
-        config_path: '/valid/path',
+        data_path: '/valid/path',
       },
       test: 'foo',
     });
