@@ -1,4 +1,4 @@
-FROM node:8.11.1-alpine
+FROM node:10.0.0-alpine
 
 ENV NODE_ENV production
 ENV PORT 80

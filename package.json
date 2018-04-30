@@ -10,15 +10,14 @@
   },
   "main": "index.js",
   "pre-commit": [
-    "css:lint",
-    "jest"
+    "test"
   ],
   "scripts": {
     "build": "node pre-build.js && npm run css:compile",
     "css": "run-p css:lint css:compile",
     "css:compile": "postcss -o dist/styles.css css/styles.css",
     "css:lint": "stylelint --config .stylelintrc \"css/**/*.css\"",
-    "eslint": "eslint .",
+    "eslint": "eslint server",
     "jest": "jest",
     "jest:watch": "jest --watch",
     "serve": "run-p serve:*",
@@ -43,7 +42,7 @@
     "pug": "^2.0.3"
   },
   "devDependencies": {
-    "browser-sync": "^2.23.6",
+    "browser-sync": "^2.24.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.11.0",
@@ -55,6 +54,12 @@
     "stylelint-config-standard": "^18.2.0",
     "stylelint-selector-bem-pattern": "^2.0.0",
     "supertest": "^3.0.0"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "server/**/*.js"
+    ]
   },
   "browserslist": [
     "Chrome >= 45",

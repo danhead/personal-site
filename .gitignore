@@ -18,6 +18,9 @@ pids
 node_modules/
 jspm_packages/
 
+# Test directories
+coverage/
+
 # Optional npm cache directory
 .npm
 
