@@ -8,6 +8,9 @@
     "type": "git",
     "url": "https://github.com/danhead/personal-site"
   },
+  "engines": {
+    "node": "^10.0.0"
+  },
   "main": "index.js",
   "pre-commit": [
     "test"
@@ -23,7 +26,7 @@
     "serve": "run-p serve:*",
     "serve:express": "nodemon -q -e js,pug",
     "serve:bs": "browser-sync start --config .browser-sync.js",
-    "start": "run-p watch serve",
+    "start": "node ./index.js",
     "test": "npm run css:lint && npm run eslint && npm run jest",
     "watch": "run-p watch:*",
     "watch:css": "nodemon -q --watch css -e css --exec npm run css",

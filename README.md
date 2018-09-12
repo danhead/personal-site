@@ -14,7 +14,7 @@ compiled at build time using [PostCSS](http://postcss.org/).
 ## Development
 
 * Install dependencies: `npm install`
-* Run: `npm start` to start the:
+* Run: `npm run dev` to start the:
   * Node.js server, using nodemon for reloading
   * Browsersync server, to proxy the Node.js server
   * CSS watch task to lint and rebuild on change
@@ -34,14 +34,4 @@ The following steps will run a production serve on port 80:
 * `export NODE_ENV=production`
 * `export PORT=80`
 * `npm run build`
-* `node index.js`
-
-## Docker image
-
-A docker image is published to the [Docker Hub](https://hub.docker.com/r/suburbanme/personal-site/)
-for every commit to the master branch, assuming all tests pass. This is run
-automatically using [CircleCI](https://circleci.com/gh/danhead/personal-site/).
-This docker image is then redeployed automatically.
-
-A reference [Docker Compose](docker-compose.yml) file is also included, which
-provides SSL termination using NGINX and Letsencrypt.
+* `npm start`

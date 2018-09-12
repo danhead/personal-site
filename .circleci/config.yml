@@ -1,109 +1,66 @@
+defaults: &defaults
+  working_directory: ~/tmp/personal-site
+  docker:
+    - image: circleci/node:10.10.0
+
 version: 2
 jobs:
-  test:
-    docker:
-      - image: circleci/node:10.0.0
+  checkout:
+    <<: *defaults
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/tmp/personal-site
+      - restore_cache:
+          keys:
+            - npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
+            - npm-cache-{{ .Branch }}
+            - npm-cache-
       - run:
           name: Install dependencies
           command: npm install
+      - save_cache:
+          key: npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - persist_to_workspace:
+          root: .
+          paths: .
+  test:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/tmp/personal-site
       - run:
           name: Run tests
           command: npm test
-  build-version:
-    machine: true
+  deploy-master:
+    <<: *defaults
     steps:
-      - checkout
+      - attach_workspace:
+          at: ~/tmp/personal-site
       - run:
-          name: Login to Docker Hub
-          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
-      - run:
-          name: Build Docker image
+          name: Install Now CLI
+          command: sudo npm install --global --unsafe-perm now
+      - deploy:
+          name: Deploy & Alias
           command: |
-            docker build \
-            --build-arg SITE_STATS_ENABLED=true \
-            --build-arg SITE_COMMIT_SHA1=$CIRCLE_SHA1 \
-            --build-arg SITE_BUILD_URL=$CIRCLE_BUILD_URL \
-            -t suburbanme/personal-site:$CIRCLE_TAG .
-      - run:
-          name: Push image to Docker Hub
-          command: docker push suburbanme/personal-site:$CIRCLE_TAG
-  build-latest:
-    machine: true
-    steps:
-      - checkout
-      - run:
-          name: Login to Docker Hub
-          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
-      - run:
-          name: Build Docker image
-          command: |
-            docker build \
-            --build-arg SITE_STATS_ENABLED=true \
-            --build-arg SITE_COMMIT_SHA1=$CIRCLE_SHA1 \
-            --build-arg SITE_BUILD_URL=$CIRCLE_BUILD_URL \
-            -t suburbanme/personal-site:latest .
-      - run:
-          name: Push image to Docker Hub
-          command: docker push suburbanme/personal-site:latest
-  deploy-latest:
-    machine: true
-    steps:
-      - run:
-          name: Write Docker certificates to disk
-          command: |
-            mkdir -p /home/circleci/certs
-            echo $CA_PEM | base64 -d > /home/circleci/certs/ca.pem
-            echo $CERT_PEM | base64 -d > /home/circleci/certs/cert.pem
-            echo $KEY_PEM | base64 -d > /home/circleci/certs/key.pem
-            echo $SERVER_KEY_PEM | base64 -d > /home/circleci/certs/server-key.pem
-      - run:
-          name: Set Docker environment variables
-          command: |
-            echo 'export DOCKER_TLS_VERIFY=1' >> $BASH_ENV
-            echo 'export DOCKER_HOST=$DOCKER_SERVER' >> $BASH_ENV
-            echo 'export DOCKER_CERT_PATH=/home/circleci/certs' >> $BASH_ENV
-            echo 'export DOCKER_MACHINE_NAME=$DOCKER_NAME' >> $BASH_ENV
-      - run:
-          name: Pull Docker image from Hub
-          command: docker pull suburbanme/personal-site:latest
-      - run:
-          name: Stop current Docker container
-          command: "docker stop $DOCKER_CONTAINER_ID || :"
-      - run:
-          name: Remove current Docker container
-          command: "docker rm $DOCKER_CONTAINER_ID || :"
-      - run:
-          name: Run new Docker container
-          command: |
-            docker run --name $DOCKER_CONTAINER_ID -d \
-              --restart=always \
-              -e LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL \
-              -e LETSENCRYPT_HOST=$LETSENCRYPT_HOST \
-              -e VIRTUAL_HOST=$VIRTUAL_HOST \
-              suburbanme/personal-site:latest
+            now --token $ZEIT_TOKEN \
+            --local-config ./.now/now.production.json \
+            --env SITE_COMMIT_SHA1=$CIRCLE_SHA1 \
+            --env SITE_BUILD_URL=$CIRCLE_BUILD_URL
+            now --token $ZEIT_TOKEN \
+            --local-config ./.now/now.production.json alias
+
 workflows:
   version: 2
-  test:
+  deploy:
     jobs:
+      - checkout
       - test:
-          filters:
-            branches:
-              ignore:
-                - master
-            tags:
-              ignore: /.*/
-  build-latest-and-deploy:
-    jobs:
-      - test:
-          filters:
-            branches:
-              only:
-                - master
-            tags:
-              ignore: /.*/
-      - build-latest:
+          requires:
+            - checkout
+      - deploy-master:
           requires:
             - test
           filters:
@@ -112,28 +69,3 @@ workflows:
                 - master
             tags:
               ignore: /.*/
-      - deploy-latest:
-          requires:
-            - build-latest
-          filters:
-            branches:
-              only:
-                - master
-            tags:
-              ignore: /.*/
-  build-version:
-    jobs:
-      - test:
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v[0-9]+(\.[0-9]+)*$/
-      - build-version:
-          requires:
-            - test
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v[0-9]+(\.[0-9]+)*$/
