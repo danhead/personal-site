@@ -1,78 +1,54 @@
 {
   "name": "personal-site",
-  "version": "1.0.1",
-  "description": "Personal website written using Node and Express",
+  "description": "My personal website",
+  "version": "0.1.0",
   "author": "Dan Head <me@danielhead.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/danhead/personal-site"
   },
-  "engines": {
-    "node": "^10.0.0"
-  },
-  "main": "index.js",
-  "pre-commit": [
-    "test"
-  ],
-  "scripts": {
-    "build": "node pre-build.js && npm run css:compile",
-    "css": "run-p css:lint css:compile",
-    "css:compile": "postcss -o dist/styles.css css/styles.css",
-    "css:lint": "stylelint --config .stylelintrc \"css/**/*.css\"",
-    "eslint": "eslint server",
-    "jest": "jest",
-    "jest:watch": "jest --watch",
-    "serve": "run-p serve:*",
-    "serve:express": "nodemon -q -e js,pug",
-    "serve:bs": "browser-sync start --config .browser-sync.js",
-    "start": "node ./index.js",
-    "test": "npm run css:lint && npm run eslint && npm run jest",
-    "watch": "run-p watch:*",
-    "watch:css": "nodemon -q --watch css -e css --exec npm run css",
-    "watch:js": "nodemon -q -e js --exec npm run eslint"
-  },
   "dependencies": {
-    "autoprefixer": "^7.2.6",
-    "cssnano": "^3.10.0",
-    "express": "^4.16.3",
-    "normalize.css": "^8.0.0",
-    "object-assign-deep": "^0.4.0",
-    "postcss-cli": "^4.1.1",
-    "postcss-custom-properties": "^6.3.1",
-    "postcss-import": "^11.1.0",
-    "postcss-pxtorem": "^4.0.1",
-    "pug": "^2.0.3"
+    "gatsby": "^2.15.29",
+    "gatsby-image": "^2.2.24",
+    "gatsby-plugin-disqus": "^1.1.2",
+    "gatsby-plugin-feed": "^2.3.16",
+    "gatsby-plugin-google-analytics": "^2.1.20",
+    "gatsby-plugin-manifest": "^2.2.20",
+    "gatsby-plugin-offline": "^3.0.11",
+    "gatsby-plugin-react-helmet": "^3.1.10",
+    "gatsby-plugin-sentry": "^1.0.1",
+    "gatsby-plugin-sharp": "^2.2.28",
+    "gatsby-remark-copy-linked-files": "^2.1.24",
+    "gatsby-remark-images": "^3.1.25",
+    "gatsby-remark-prismjs": "^3.3.18",
+    "gatsby-remark-reading-time": "^1.0.1",
+    "gatsby-remark-responsive-iframe": "^2.2.21",
+    "gatsby-remark-smartypants": "^2.1.11",
+    "gatsby-source-filesystem": "^2.1.29",
+    "gatsby-transformer-remark": "^2.6.27",
+    "gatsby-transformer-sharp": "^2.2.20",
+    "prismjs": "^1.17.1",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-helmet": "^5.2.1",
+    "rehype-react": "^4.0.1",
+    "styled-components": "^4.4.0",
+    "typeface-lato": "0.0.75"
   },
   "devDependencies": {
-    "browser-sync": "^2.24.7",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "jest": "^22.4.4",
-    "nodemon": "^1.18.4",
-    "npm-run-all": "^4.1.3",
-    "pre-commit": "^1.2.2",
-    "stylelint": "^9.5.0",
-    "stylelint-config-standard": "^18.2.0",
-    "stylelint-selector-bem-pattern": "^2.0.0",
-    "supertest": "^3.1.0"
+    "eslint-config-react-app": "^5.0.2",
+    "prettier": "^1.18.2"
   },
-  "jest": {
-    "testURL": "http://127.0.0.1",
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "server/**/*.js"
-    ]
-  },
-  "browserslist": [
-    "Chrome >= 45",
-    "Firefox ESR",
-    "Edge >= 12",
-    "Explorer >= 11",
-    "iOS >= 9",
-    "Safari >= 9",
-    "Android >= 4.4",
-    "Opera >= 30"
-  ]
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \""
+  }
 }

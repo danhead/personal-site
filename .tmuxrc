@@ -1,0 +1,6 @@
+rename-session personal-site
+rename-window vim
+split-window -h
+resize-pane -R 10
+rename-window shell
+send "npm start" C-m

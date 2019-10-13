@@ -1,8 +1,0 @@
-footer.Footer
-  .Footer-container
-    p.Footer-text &copy; Daniel Head 2018
-    if config.stats_enabled
-      p.Footer-text
-        | Commit: #[a.Link.Link--footer(href=commit.url)= commit.short_hash]
-        | Built: #[a.Link.Link--footer(href=build.url)= build.timestamp]
-
