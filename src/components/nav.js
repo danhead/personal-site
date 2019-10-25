@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react"
+import React, { useRef } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Image from "gatsby-image"
 import PropTypes from "prop-types"
@@ -118,10 +118,6 @@ const Nav = ({ active, onClose }) => {
     }
   }
 
-  useEffect(() => {
-    console.log(first, last)
-  })
-
   return (
     <Container>
       <Head active={active}>
@@ -130,6 +126,8 @@ const Nav = ({ active, onClose }) => {
           alt={data.site.siteMetadata.author}
           imgStyle={{
             borderRadius: `50%`,
+            transition: `transform ${transition({ delay: 'medium' })}`,
+            transform: `scale(${active ? 1 : 0})`,
           }}
         />
         <CloseButton
